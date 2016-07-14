@@ -49,14 +49,14 @@ abstract class AbstractFileSigner extends AbstractService implements AbstractFil
     /**
      * {@inheritdoc}
      */
-    public function startSession($SigDocXML='')
+    public function startSession($sigDocXML = '')
     {
 
-        $response = $this->digiDocService->StartSession('', $SigDocXML, true);
+        $response = $this->digiDocService->StartSession('', $sigDocXML, true);
 
         $this->sessionCode = $response['Sesscode'];
 
-        if (empty($SigDocXML)) {
+        if (empty($sigDocXML)) {
             $this->createSignedDoc();
         }
     }

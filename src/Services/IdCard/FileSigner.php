@@ -9,12 +9,20 @@ use Bigbank\DigiDoc\Soap\InteractionStatus;
  */
 class FileSigner extends AbstractFileSigner implements FileSignerInterface
 {
+
     /**
      * {@inheritdoc}
      */
-    public function PrepareSignature($certificate, $tokenId='', $role='', $city='', $state='',
-                                     $postalCode='', $country='', $signingProfile='')
-    {
+    public function prepareSignature(
+        $certificate,
+        $tokenId = '',
+        $role = '',
+        $city = '',
+        $state = '',
+        $postalCode = '',
+        $country = '',
+        $signingProfile = ''
+    ) {
         return $this->digiDocService->PrepareSignature(
             $this->sessionCode,
             $certificate,
@@ -31,7 +39,7 @@ class FileSigner extends AbstractFileSigner implements FileSignerInterface
     /**
      * {@inheritdoc}
      */
-    public function FinalizeSignature($signatureId, $signatureValue)
+    public function finalizeSignature($signatureId, $signatureValue)
     {
         return $this->digiDocService->FinalizeSignature(
             $this->sessionCode,

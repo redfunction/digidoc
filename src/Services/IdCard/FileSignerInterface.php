@@ -21,8 +21,16 @@ interface FileSignerInterface
      *
      * @return mixed
      */
-    public function PrepareSignature($certificate, $tokenId='', $role='', $city='', $state='',
-                                     $postalCode='', $country='', $signingProfile='');
+    public function prepareSignature(
+        $certificate,
+        $tokenId = '',
+        $role = '',
+        $city = '',
+        $state = '',
+        $postalCode = '',
+        $country = '',
+        $signingProfile = ''
+    );
 
     /**
      * Finalize the signature adding that was previously started with PrepareSignature
@@ -32,7 +40,7 @@ interface FileSignerInterface
      *
      * @return mixed
      */
-    public function FinalizeSignature($signatureId, $signatureValue);
+    public function finalizeSignature($signatureId, $signatureValue);
 
     /**
      * Returns OK only if all the signatures on the document are valid

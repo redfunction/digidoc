@@ -12,11 +12,11 @@ interface AbstractFileSignerInterface
     /**
      * Initiate the session of signing a file
      *
-     * @param string $SigDocXML - pass base64 encoded string of bdoc container
+     * @param string $sigDocXML - pass base64 encoded string of bdoc container
      *
      * @return array
      */
-    public function startSession($SigDocXML='');
+    public function startSession($sigDocXML = '');
 
     /**
      * Add a file to the container for signing

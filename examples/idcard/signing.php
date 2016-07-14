@@ -14,7 +14,7 @@ $signer = $digiDocService->getService(FileSignerInterface::class);
 
 if(!empty($_POST["certificate"])) {
     $signer->setSessionCode($_POST["session"]);
-    $data = $prepareSignatureResponse = $signer->PrepareSignature($_POST['certificate']);
+    $data = $prepareSignatureResponse = $signer->prepareSignature($_POST['certificate']);
     header("Content-Type: application/json");
     print json_encode($data);
     exit;
@@ -22,7 +22,7 @@ if(!empty($_POST["certificate"])) {
 
 if(!empty($_POST["signature"])) {
     $signer->setSessionCode($_POST["session"]);
-    $data = $prepareSignatureResponse = $signer->FinalizeSignature($_POST['signature_id'], $_POST['signature']);
+    $data = $prepareSignatureResponse = $signer->finalizeSignature($_POST['signature_id'], $_POST['signature']);
     $signer->waitForSignature(function($status, $fileContent) use ($signer) {
         $content = base64_decode($fileContent);
         file_put_contents("testfile.bdoc", $content);
