@@ -1,5 +1,8 @@
 <?php
 
+ini_set('soap.wsdl_cache_enabled', '0');
+ini_set('soap.wsdl_cache_ttl', '0');
+
 include __DIR__ . '/../../vendor/autoload.php';
 
 use Bigbank\DigiDoc\DigiDoc;
@@ -54,9 +57,8 @@ if (empty($bdocContent) && !empty($fileContent)) {
 printf("Signing...\n");
 
 print "<script src=\"hwcrypto.js\"></script>";
-print "<script src=\"jquery.js\"></script>";
 ?>
-
+<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
 <script>
 
     var lang = "et";
