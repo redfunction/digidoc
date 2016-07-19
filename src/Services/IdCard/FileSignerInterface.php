@@ -10,7 +10,7 @@ interface FileSignerInterface
     /**
      * Start adding signature with ID Card
      *
-     * @param        $certificate
+     * @param string $certificate
      * @param string $tokenId
      * @param string $role
      * @param string $city
@@ -35,8 +35,8 @@ interface FileSignerInterface
     /**
      * Finalize the signature adding that was previously started with PrepareSignature
      *
-     * @param $signatureId
-     * @param $signatureValue
+     * @param string $signatureId
+     * @param string $signatureValue
      *
      * @return mixed
      */
@@ -45,7 +45,14 @@ interface FileSignerInterface
     /**
      * Returns OK only if all the signatures on the document are valid
      *
-     * @return mixed
+     * @return string
      */
     public function getSignatureStatus();
+
+    /**
+     * Returns information about container in the session
+     *
+     * @return object
+     */
+    public function getSignatureInfo();
 }

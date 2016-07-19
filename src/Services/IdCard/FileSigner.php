@@ -90,4 +90,12 @@ class FileSigner extends AbstractFileSigner implements FileSignerInterface
 
         return $status;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSignatureInfo()
+    {
+        return $this->digiDocService->GetSignedDocInfo($this->sessionCode);
+    }
 }

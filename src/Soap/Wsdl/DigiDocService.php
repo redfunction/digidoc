@@ -46,11 +46,9 @@ class DigiDocService extends \Bigbank\DigiDoc\Soap\ProxyAwareClient
                 $options['classmap'][$key] = $value;
             }
         }
-        /*$options = array_merge([
-            'proxy_host' => 'cache.big.local',
-            'proxy_port' => 3128,
-            'features'   => 1,
-        ], $options);*/
+        $options = array_merge([
+            'features'   => SOAP_SINGLE_ELEMENT_ARRAYS,
+        ], $options);
         parent::__construct($wsdl, $options);
     }
 
@@ -64,7 +62,7 @@ class DigiDocService extends \Bigbank\DigiDoc\Soap\ProxyAwareClient
      *
      * @return list(string $Status, int $Sesscode, SignedDocInfo $SignedDocInfo)
      */
-    public function StartSession($SigningProfile, $SigDocXML, $bHoldSession, DataFileData $datafile=null)
+    public function StartSession($SigningProfile, $SigDocXML, $bHoldSession, DataFileData $datafile = null)
     {
 
         return $this->__soapCall('StartSession', [$SigningProfile, $SigDocXML, $bHoldSession, $datafile]);

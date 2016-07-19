@@ -25,7 +25,6 @@ abstract class AbstractFileSigner extends AbstractService implements AbstractFil
      */
     public function askStatus()
     {
-
         return $this->fetchStatusInfo()['StatusCode'];
     }
 
@@ -40,7 +39,6 @@ abstract class AbstractFileSigner extends AbstractService implements AbstractFil
             $status = $this->askStatus();
             sleep($this->pollingFrequency);
         }
-        error_log("STATUS IS:".$status);
 
         $fileData = $status === InteractionStatus::SIGNATURE ? $this->downloadContainer() : [];
         return call_user_func($callback, $status, $fileData, $this->sessionCode);
@@ -51,7 +49,6 @@ abstract class AbstractFileSigner extends AbstractService implements AbstractFil
      */
     public function startSession($sigDocXML = '')
     {
-
         $response = $this->digiDocService->StartSession('', $sigDocXML, true);
 
         $this->sessionCode = $response['Sesscode'];
@@ -74,7 +71,6 @@ abstract class AbstractFileSigner extends AbstractService implements AbstractFil
      */
     protected function createSignedDoc()
     {
-
         $this->digiDocService->CreateSignedDoc($this->sessionCode, 'BDOC', '2.1');
     }
 
@@ -83,7 +79,6 @@ abstract class AbstractFileSigner extends AbstractService implements AbstractFil
      */
     public function addFile($fileName, $mimeType, $content)
     {
-
         $response = $this->digiDocService->AddDataFile(
             $this->sessionCode,
             $fileName,
@@ -104,7 +99,6 @@ abstract class AbstractFileSigner extends AbstractService implements AbstractFil
      */
     protected function fetchStatusInfo()
     {
-
         return $this->digiDocService->GetStatusInfo($this->sessionCode, false, false);
     }
 
@@ -113,7 +107,6 @@ abstract class AbstractFileSigner extends AbstractService implements AbstractFil
      */
     public function downloadContainer()
     {
-
         $response = $this->digiDocService->GetSignedDoc($this->sessionCode);
 
         if (!isset($response['SignedDocData'])) {
@@ -127,7 +120,6 @@ abstract class AbstractFileSigner extends AbstractService implements AbstractFil
      */
     public function closeSession()
     {
-
         return $this->digiDocService->CloseSession($this->sessionCode) === 'OK';
     }
 
@@ -136,7 +128,6 @@ abstract class AbstractFileSigner extends AbstractService implements AbstractFil
      */
     public function setSessionCode($code)
     {
-
         $this->sessionCode = $code;
         return $this;
     }
