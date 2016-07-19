@@ -70,16 +70,22 @@ class FileSigner extends AbstractFileSigner implements FileSignerInterface
     {
         $info = $this->digiDocService->GetSignedDocInfo($this->sessionCode);
 
-        $signature = $info["SignedDocInfo"]->getSignatureInfo();
-        if (is_array($signature)) {
-            foreach ($signature as $signatureItem) {
-                $status = $signatureItem->getStatus();
-                if ($status != "OK") {
-                    return $status;
-                }
+        $signature = $info['SignedDocInfo']->getSignatureInfo();
+
+        if (!is_array($signature)) {
+            return $signature->getStatus();
+        }
+
+        if (!count($signature)) {
+            // it is perfectly ok not to have any signatures in a container
+            return null;
+        }
+
+        foreach ($signature as $signatureItem) {
+            $status = $signatureItem->getStatus();
+            if ($status != 'OK') {
+                return $status;
             }
-        } else {
-            $status = $signature->getStatus();
         }
 
         return $status;

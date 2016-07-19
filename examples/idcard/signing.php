@@ -36,10 +36,10 @@ $signer = $digiDocService->getService(FileSignerInterface::class);
  *
  * 1. Ask certificate from browser and store it in SK
  */
-if(!empty($_POST["certificate"])) {
-    $signer->setSessionCode($_POST["session"]);
+if(!empty($_POST['certificate'])) {
+    $signer->setSessionCode($_POST['session']);
     $data = $prepareSignatureResponse = $signer->prepareSignature($_POST['certificate']);
-    header("Content-Type: application/json");
+    header('Content-Type: application/json');
     print json_encode($data);
     exit;
 }
@@ -47,15 +47,15 @@ if(!empty($_POST["certificate"])) {
 /**
  * 2. Finalize the signature from browser and store it in SK
  */
-if(!empty($_POST["signature"])) {
-    $signer->setSessionCode($_POST["session"]);
+if(!empty($_POST['signature'])) {
+    $signer->setSessionCode($_POST['session']);
     $data = $prepareSignatureResponse = $signer->finalizeSignature($_POST['signature_id'], $_POST['signature']);
     $signer->waitForSignature(function($status, $fileContent) use ($signer) {
         $content = base64_decode($fileContent);
-        file_put_contents("testfile.bdoc", $content);
+        file_put_contents('testfile.bdoc', $content);
         $signer->closeSession();
     });
-    header("Content-Type: application/json");
+    header('Content-Type: application/json');
     print json_encode($data);
     exit;
 }
@@ -83,12 +83,12 @@ if (empty($bdocContent) && !empty($fileContent)) {
 This is the frontend part of the signing
 </p>
 
-<script src="hwcrypto.js"></script>
-<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+<script src='hwcrypto.js'></script>
+<script src='https://code.jquery.com/jquery-3.1.0.min.js' integrity='sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=' crossorigin='anonymous'></script>
 <script>
 
-    var lang = "et";
-    var cert = "";
+    var lang = 'et';
+    var cert = '';
 
 function log_text(msg) {
     console.log(msg);
@@ -97,9 +97,9 @@ function log_text(msg) {
 function onSign(response) {
     var signature_id = response.SignatureId;
     window.hwcrypto.sign(cert, {type: 'SHA-256', hex: response.SignedInfoDigest}, {lang: lang}).then(function(response) {
-        console.log("Generated signature:\n" + response.hex.match(/.{1,64}/g).join("\n"));
+        console.log('Generated signature:\n' + response.hex.match(/.{1,64}/g).join('\n'));
         console.log(response);
-        $.post('', {session: "<?= $signer->getSession() ?>", signature: response.hex, signature_id: signature_id});
+        $.post('', {session: '<?= $signer->getSession() ?>', signature: response.hex, signature_id: signature_id});
     }, function(err) {
         console.log(err);
     });
@@ -109,13 +109,13 @@ function prepareSignature(event) {
     window.hwcrypto.getCertificate({lang: lang}).then(function(response) {
         console.log(response);
       cert = response;
-      $.post("", {certificate: response.hex, session: "<?= $signer->getSession() ?>"}, onSign, "json");
+      $.post('', {certificate: response.hex, session: '<?= $signer->getSession() ?>'}, onSign, 'json');
     }, function(err) {
-      log_text("getCertificate() failed: " + err);
+      log_text('getCertificate() failed: ' + err);
     });
 }
 </script>
 
-    <button type="button" onclick="prepareSignature(event)">Click here, to start signing</button>
+    <button type='button' onclick='prepareSignature(event)'>Click here, to start signing</button>
 
 </body></html>
