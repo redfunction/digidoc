@@ -1,13 +1,13 @@
 <?php
 namespace Bigbank\DigiDoc\Services\IdCard;
 
-use Bigbank\DigiDoc\Services\AbstractFileSigner;
+use Bigbank\DigiDoc\Services\BaseFileSigner;
 use Bigbank\DigiDoc\Soap\InteractionStatus;
 
 /**
  * {@inheritdoc}
  */
-class FileSigner extends AbstractFileSigner implements FileSignerInterface
+class FileSigner extends BaseFileSigner implements FileSignerInterface
 {
 
     /**

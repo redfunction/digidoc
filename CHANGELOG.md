@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org). See [Keep A Changelog](http://keepachangelog.com) for instructions on how to maintain this file.
 
-## 0.2.0 - 2016-07-16
+## 0.3.0 - 2016-07-16
 
 Add Id Card signing support
 Refactor both Mobile Id and Id Card signing to use the same base class

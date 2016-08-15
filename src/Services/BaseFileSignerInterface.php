@@ -6,7 +6,7 @@ use Bigbank\DigiDoc\Exceptions\DigiDocException;
 /**
  * Put files into a .bdoc container and sign them
  */
-interface AbstractFileSignerInterface
+interface BaseFileSignerInterface
 {
 
     /**
@@ -63,7 +63,7 @@ interface AbstractFileSignerInterface
      *
      * @param $code
      *
-     * @return AbstractFileSigner
+     * @return BaseFileSigner
      */
     public function setSessionCode($code);
 }

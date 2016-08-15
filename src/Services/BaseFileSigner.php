@@ -7,7 +7,7 @@ use Bigbank\DigiDoc\Soap\InteractionStatus;
 /**
  * {@inheritdoc}
  */
-abstract class AbstractFileSigner extends AbstractService implements AbstractFileSignerInterface
+class BaseFileSigner extends AbstractService implements BaseFileSignerInterface
 {
 
     /**
