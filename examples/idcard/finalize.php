@@ -17,7 +17,7 @@ $signer = $digiDocService->getService(FileSignerInterface::class);
  * 2. Finalize the signature from browser and store it in SK
  */
 $signer->setSessionCode($_POST['session']);
-$data = $prepareSignatureResponse = $signer->finalizeSignature($_POST['signature_id'], $_POST['signature']);
+$data = $signer->finalizeSignature($_POST['signature_id'], $_POST['signature']);
 $signer->waitForSignature(function($status, $fileContent) use ($signer) {
     $content = base64_decode($fileContent);
     file_put_contents('testfile.bdoc', $content);
