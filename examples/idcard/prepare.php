@@ -6,7 +6,7 @@ use Bigbank\DigiDoc\DigiDoc;
 use Bigbank\DigiDoc\Services\IdCard\FileSignerInterface;
 
 // Instantiate the main class - use DigiDoc testing service
-$digiDocService = new DigiDoc(DigiDoc::URL_TEST);
+$digiDocService = new DigiDoc(DigiDoc::URL_TEST, ['cache_wsdl' => WSDL_CACHE_NONE]);
 
 // Ask for the file signing service
 /** @var FileSignerInterface $signer */

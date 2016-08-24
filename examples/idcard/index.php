@@ -11,6 +11,13 @@ if (file_exists(__DIR__ . '/example.document.bdoc')) {
     $fileContent = base64_encode(file_get_contents(__DIR__ . '/example.document.pdf'));
 }
 
+// Instantiate the main class - use DigiDoc testing service
+$digiDocService = new DigiDoc(DigiDoc::URL_TEST, ['cache_wsdl' => WSDL_CACHE_NONE]);
+
+// Ask for the file signing service
+/** @var FileSignerInterface $signer */
+$signer = $digiDocService->getService(FileSignerInterface::class);
+
 // the session has to be started, no matter what.
 // if we are adding a new signature, then the base64 of bdoc must be passed here as well
 $signer->startSession($bdocContent);
