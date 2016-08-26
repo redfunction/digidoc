@@ -21,7 +21,7 @@ class FileSigner extends BaseFileSigner implements FileSignerInterface
             sleep($this->pollingFrequency);
         }
 
-        $fileData = $status === InteractionStatus::SIGNATURE ? $this->downloadContainer() : [];
+        $fileData = $status === InteractionStatus::SIGNATURE ? $this->downloadContainer() : null;
         return call_user_func($callback, $status, $fileData, $this->sessionCode);
     }
 

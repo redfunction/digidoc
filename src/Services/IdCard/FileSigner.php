@@ -59,7 +59,7 @@ class FileSigner extends BaseFileSigner implements FileSignerInterface
             sleep($this->pollingFrequency);
         }
 
-        $fileData = $status === "OK" ? $this->downloadContainer() : [];
+        $fileData = $status === InteractionStatus::OK ? $this->downloadContainer() : null;
         return call_user_func($callback, $status, $fileData, $this->sessionCode);
     }
 
@@ -83,7 +83,7 @@ class FileSigner extends BaseFileSigner implements FileSignerInterface
 
         foreach ($signature as $signatureItem) {
             $status = $signatureItem->getStatus();
-            if ($status != 'OK') {
+            if ($status != InteractionStatus::OK) {
                 return $status;
             }
         }
